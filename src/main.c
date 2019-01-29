@@ -6,7 +6,7 @@
 /*   By: shthevak <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/01/28 18:24:11 by shthevak     #+#   ##    ##    #+#       */
-/*   Updated: 2019/01/29 14:42:34 by shthevak    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/01/29 17:59:55 by shthevak    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -150,17 +150,17 @@ int	ft_var_len(char *com, int i, t_envlist **envir)
 
 	list = *envir;
 	tab = ft_strsplit(com + i +1, ' ');
-	dprintf(1, "test = %s\n" , tab[0]);
 	while (list)
 	{
 		if (ft_strcmp(tab[0], list->var) == 0)
 		{
 			dprintf(1, "ret = %d\n" ,ft_strlen(list->val));
+			ft_free_tab(tab);
 			return (ft_strlen(list->val));
 		}
 		list = list->next;
 	}
-	//free(tab);
+	ft_free_tab(tab);
 	return (0);
 }
 void	ft_command_len(char **str, t_envlist **envir, int *l)
@@ -251,18 +251,18 @@ int main(int argc, char **argv, char **env)
 	env_list = NULL;
 	get_env_struct(env, &env_list);
 	////
-	t_envlist	*enviro = env_list;
+/*	t_envlist	*enviro = env_list;
 
 	while (enviro)
 	{
 		dprintf(1, "%s = %s\n", enviro->var, enviro->val);
 		enviro = enviro->next;
 	}
-	///
+*/	///
 	while (1)
 	{
 		ft_prompt(&env_list);
 	}
-	//	ft_free_env(envir);
+	free_envlist(&env_list);
 	return (0);
 }

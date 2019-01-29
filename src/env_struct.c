@@ -6,7 +6,7 @@
 /*   By: shthevak <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/01/29 12:54:50 by shthevak     #+#   ##    ##    #+#       */
-/*   Updated: 2019/01/29 14:40:07 by shthevak    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/01/29 17:51:37 by shthevak    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -29,7 +29,7 @@ void	get_env_struct(char **str, t_envlist **list)
 		new->env = 0;
 		env_list_add(list, new);
 		i++;
-//		free(tab)
+		ft_free_tab(tab);
 	}
 }
 
