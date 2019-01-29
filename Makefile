@@ -6,7 +6,7 @@
 #    By: shthevak <marvin@le-101.fr>                +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2019/01/28 15:19:07 by shthevak     #+#   ##    ##    #+#        #
-#    Updated: 2019/01/28 21:45:09 by shthevak    ###    #+. /#+    ###.fr      #
+#    Updated: 2019/01/29 13:02:24 by shthevak    ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
@@ -19,9 +19,9 @@ NAME = minishell
 #									PATH                                       #
 # **************************************************************************** #
 
-SRC_PATH= ./src/
-OBJ_PATH= ./obj/
-INC_PATH= ./includes/
+SRC_PATH = ./src/
+OBJ_PATH = ./obj/
+INC_PATH = ./includes/
 LIBFT_PATH = ./libft/
 PRINT_PATH = ./ft_printf/
 
@@ -32,16 +32,16 @@ PRINT_PATH = ./ft_printf/
 LIB_NAME = libft.a
 PRT_NAME = libftprintf.a
 
-INC_NAME=minishell.h
+INC_NAME =minishell.h
 
-SRC_NAME = main.c drakauf.c charizard.c\
+SRC_NAME = main.c drakauf.c charizard.c env_struct.c
 
 
 # **************************************************************************** #
 #  									VAR                                        #
 # **************************************************************************** #
 
-OBJ_NAME= $(SRC_NAME:.c=.o)
+OBJ_NAME = $(SRC_NAME:.c=.o)
 INC = $(addprefix $(INC_PATH), $(INC_NAME))
 OBJ = $(addprefix $(OBJ_PATH), $(OBJ_NAME))
 SRC = $(addprefix $(SRC_PATH), $(SRC_NAME))
@@ -54,10 +54,10 @@ LIB = $(addprefix $(LIBFT_PATH), $(LIB_NAME))
 # **************************************************************************** #
 
 ifndef FLAG
-	FLAG= -Wall -Werror -Wextra
+	FLAG = -Wall -Werror -Wextra
 endif
 
-NORME= norminette
+NORME = norminette
 
 # **************************************************************************** #
 #  									STYLE                                      #
