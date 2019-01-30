@@ -6,7 +6,7 @@
 /*   By: shthevak <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/01/28 18:24:11 by shthevak     #+#   ##    ##    #+#       */
-/*   Updated: 2019/01/29 17:59:55 by shthevak    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/01/30 19:23:05 by shthevak    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -58,14 +58,20 @@ void		ft_last_quote(char *str, char c, int *i, int *k)
 
 	m = 1;
 	l = 0;
+//	dprintf(1, "quote len in = %d %d \n", *i, *k);
 	while (str[m + *i])
 	{
-		if (str[m + *i] == c)
-			l = m - 1;
+//		dprintf(1, "c = %c, m + i= %d", str[m + *i], m + *i);
+		if (str[m + *i] == c && (m + *i) > 0 && str[m + *i - 1] != '\\')
+		{
+			l = m;
+			break ;
+		}
 		m++;
 	}
 	*i += l + 1;
 	*k += l;
+//	dprintf(1, "quote len in = %d %d \n", *i, *k);
 }
 /*
    int		ft_new_str_len(char *str, int i, int j)
@@ -154,7 +160,7 @@ int	ft_var_len(char *com, int i, t_envlist **envir)
 	{
 		if (ft_strcmp(tab[0], list->var) == 0)
 		{
-			dprintf(1, "ret = %d\n" ,ft_strlen(list->val));
+//			dprintf(1, "ret = %d\n" ,ft_strlen(list->val));
 			ft_free_tab(tab);
 			return (ft_strlen(list->val));
 		}
@@ -192,12 +198,77 @@ void	ft_command_len(char **str, t_envlist **envir, int *l)
 	}
 }
 
+void	ft_getin_quote(char **str, char **new, int *i, int *j)
+{
+	int k;
+	int	m;
+	char	c;
+
+	k = 0;
+	m = 0;
+	c = (*str)[(*i)++];
+	dprintf(1, "bug here %c\n", c);
+	ft_last_quote((*str) + (*i), c, &m, &k);
+	if (k != 0)
+	{
+		while ((*str)[*i])
+		{
+			dprintf(1, "char =  %c ", (*str)[*i]);
+			if ((*str)[*i] == '\\')
+			{
+				(*i)++;
+				(*new)[(*j)++] = (*str)[*i];
+				dprintf(1, "c == \ \n");
+			}
+			else if ((*str)[*i] == c)
+			{
+				dprintf(1, "c == str[i]\n");
+				break ;
+			}
+			else
+			{
+				(*new)[(*j)++] = (*str)[*i];
+				dprintf(1, "copied \n");
+			}
+			(*i)++;
+		}
+	}
+}
+
+void	ft_copy_com(char **str, char **new, t_envlist **envir)
+{
+	int i;
+	int j;
+
+	i = 0;
+	j = 0;
+	while((*str)[i])
+	{
+		if ((*str)[i] != '\\' && (*str)[i] != '$' && (*str)[i] != '\'' && (*str)[i] != '"')
+			(*new)[j++] = (*str)[i];
+		else if ((*str)[i] == '\\')
+		{
+			i++;
+			(*new)[j++] = (*str)[i];
+		}
+		else if ((*str)[i] == '\'' || (*str)[i] == '"')
+			ft_getin_quote(str, new, &i, &j);
+		if ((*str)[i])
+			i++;
+	}
+	dprintf(1, "test = %s\n", *new);
+}
+
 void	ft_handle_command(char **str, t_envlist **envir)
 {
 	int		l;
+	char	*com;
 
 	l = 0;
 	ft_command_len(str, envir, &l);
+	com = ft_strnew(l);
+	ft_copy_com(str, &com, envir);
+
 }
 
 void	ft_parse_line(char *line, t_envlist **envir)
