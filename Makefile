@@ -6,7 +6,7 @@
 #    By: shthevak <marvin@le-101.fr>                +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2019/01/28 15:19:07 by shthevak     #+#   ##    ##    #+#        #
-#    Updated: 2019/01/29 15:26:31 by shthevak    ###    #+. /#+    ###.fr      #
+#    Updated: 2019/01/31 14:08:33 by shthevak    ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
@@ -54,7 +54,7 @@ LIB = $(addprefix $(LIBFT_PATH), $(LIB_NAME))
 # **************************************************************************** #
 
 ifndef FLAG
-	FLAG = -Wall -Werror -Wextra
+	FLAG = -Wall -Werror -Wextra -g
 endif
 
 NORME = norminette

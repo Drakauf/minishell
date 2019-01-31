@@ -6,7 +6,7 @@
 /*   By: shthevak <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/01/29 15:26:38 by shthevak     #+#   ##    ##    #+#       */
-/*   Updated: 2019/01/29 17:59:53 by shthevak    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/01/31 14:10:01 by shthevak    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -24,7 +24,9 @@ void	ft_free_tab(char **tab)
 		tab[i] = NULL;
 		i++;
 	}
-	*tab = NULL;
+	free(tab[i]);
+	free(tab);
+	tab = NULL;
 }
 
 void	free_envlist(t_envlist **list)
