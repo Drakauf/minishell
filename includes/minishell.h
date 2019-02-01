@@ -6,7 +6,7 @@
 /*   By: shthevak <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/01/29 01:50:41 by shthevak     #+#   ##    ##    #+#       */
-/*   Updated: 2019/01/29 17:58:10 by shthevak    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/02/01 14:09:59 by shthevak    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -53,6 +53,13 @@ t_envlist				*create_env_elem(char *var, char *val);
 void					get_env_struct(char **str, t_envlist **list);
 void					ft_free_tab(char **tab);
 void					free_envlist(t_envlist **list);
+int						ft_last_nquote(char *str, char c, int *i);
+void						ft_last_quote(char *str, char c, int *i, int *k);
+int						next_comma(int i, char c, char *line);
+int						separate_scolon(char *line, int k);
+char					**ft_split_com(char *str);
+int						ft_words(char *line);
+int						ft_wordlen(char *str, size_t i);
 
 /*
 ** V

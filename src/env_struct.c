@@ -6,18 +6,18 @@
 /*   By: shthevak <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/01/29 12:54:50 by shthevak     #+#   ##    ##    #+#       */
-/*   Updated: 2019/01/31 14:13:39 by shthevak    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/02/01 13:30:32 by shthevak    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void	get_env_struct(char **str, t_envlist **list)
+void		get_env_struct(char **str, t_envlist **list)
 {
-	char	**envir;
-	char	**tab;
-	int		i;
+	char		**envir;
+	char		**tab;
+	int			i;
 	t_envlist	*new;
 
 	i = 0;
@@ -34,7 +34,7 @@ void	get_env_struct(char **str, t_envlist **list)
 	}
 }
 
-void	env_list_add(t_envlist **l, t_envlist *list)
+void		env_list_add(t_envlist **l, t_envlist *list)
 {
 	t_envlist	*tmp;
 

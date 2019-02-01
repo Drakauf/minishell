@@ -6,90 +6,12 @@
 /*   By: shthevak <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/01/28 18:24:11 by shthevak     #+#   ##    ##    #+#       */
-/*   Updated: 2019/01/31 18:42:09 by shthevak    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/02/01 13:43:08 by shthevak    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-
-int		next_comma(int i, char c, char *line)
-{
-	int	k;
-
-	k = 1;
-	while (line[i + k])
-	{
-		if (line[i + k] == c && (i + k - 1 >= 0 && line[i + k - 1] != '\\'))
-		{
-			break;
-		}
-		k++;
-	}
-	if (line[i + k])
-		return (i + k);
-	else
-		return (i);
-}
-
-int		separate_comma(char *line, int k)
-{
-	int		i;
-
-	i = 0;
-	while (line[k + i])
-	{
-		if (line[k + i] == '\'')
-			i = next_comma(i, '\'', line);
-		else if (line[k + i] == '\"')
-			i = next_comma(i, '\"', line);
-		else if (line[k + i] == ';' && ((k + i == 0) || (line[k + i - 1] && line[k + i - 1] != '\\')))
-			return (k + i);
-		if (line[i + k])	
-			i++;
-	}
-	return (k + i);
-}
-
-int		ft_last_nquote(char *str, char c, int *i)
-{
-	int		m;
-	int 	l;
-
-	m = 1;
-	l = 0;
-	while (str[m + *i])
-	{
-		if (str[m + *i] == c && (((m + *i) > 0 && str[m + *i - 1] != '\\') || (!str[m + *i + 1])))
-		{
-			l = m;
-			break ;
-		}
-		m++;
-	}
-	*i += l + 1;
-	return (l);
-}
-
-void		ft_last_quote(char *str, char c, int *i, int *k)
-{
-	int		m;
-	int 	l;
-
-	m = 1;
-	l = 0;
-	while (str[m + *i])
-	{
-		if (str[m + *i] == c && (((m + *i) > 0 && str[m + *i - 1] != '\\') || (!str[m + *i + 1])))
-		{
-			l = m;
-			break ;
-		}
-		m++;
-	}
-	*i += l + 1;
-	*k += l;
-}
 
 int	ft_var_len(char *com, int i, t_envlist **envir)
 {
@@ -214,7 +136,7 @@ void	ft_copy_com(char **str, char **new, t_envlist **envir)
 			i++;
 	}
 }
-
+/*
 size_t	ft_wordlen(char *s, size_t i)
 {
 	size_t j;
@@ -224,7 +146,7 @@ size_t	ft_wordlen(char *s, size_t i)
 		j++;
 	return (j);
 }
-
+*/
 char	**ft_com_exe(char *s)
 {
 	int i;
@@ -271,7 +193,7 @@ void	ft_handle_command(char **str, t_envlist **envir)
 	ctab = ft_com_exe(com);
 	free(com);
 }
-
+/*
 int		ft_words(char *line)
 {
 	int i;
@@ -287,7 +209,6 @@ int		ft_words(char *line)
 	{
 		while (line[i] && ((line[i] <= 13 && line[i] >= 9) || line[i] == ' '))
 		{
-//			dprintf(1, "|word0|\n");
 			i++;
 		}
 		if (line[i])
@@ -299,14 +220,13 @@ int		ft_words(char *line)
 			}
 			else
 			{
-				while (line[i] /*&& (line[i] >= 13 || line[i] <= 9) && line[i] != ' '*/)
+				while (line[i] && (line[i] >= 13 || line[i] <= 9) && line[i] != ' ')
 					i++;
 			}
 			s++;
 		(line[i]) ? i++ : 0;
 		}
 	}
-//	dprintf(1, "|word1|\n");
 	return (s);
 }
 
@@ -318,14 +238,11 @@ char	**ft_commandetab(char *str)
 
 	i = 0;
 	j = 0;
-//	dprintf(1, "|test0|\n");
 	if (!(tab = malloc(sizeof(tab) * ft_words(str) + 1)))
 		return (NULL);
-//	dprintf(1, "|test1|\n");
 	while (str[i])
 	{
-		dprintf(1, "%d\n", i);
-		while (str[i] && (str[i] <= 13 && str[i] >= 9) && str[i] == ' ')
+		while (str[i] && ((str[i] <= 13 && str[i] >= 9) || str[i] == ' '))
 			i++;
 		if (str[i] && (str[i] == '\'' || str[i] == '"'))
 			tab[j++] = ft_strsub(str, i, ft_last_nquote(str, str[i], &i) +1);
@@ -337,11 +254,10 @@ char	**ft_commandetab(char *str)
 		if (str[i])
 			i++;
 	}
-//	dprintf(1, "|test2|\n", tab[i]);
 	tab[j] = NULL;
 	return (tab);
 }
-
+*/
 void	ft_parse_line(char *line, t_envlist **envir)
 {
 	char	*str;
@@ -352,26 +268,33 @@ void	ft_parse_line(char *line, t_envlist **envir)
 
 	i = 0;
 	j = 0;
+	int k;
 	str = NULL;
-//	tab = ft_commandetab(line);
-//	while (tab[i])
-//	{
-//		dprintf(1, "|%s|\n", tab[i]);
-//		i++;
-//	}
-//	i = 0;
-//	dprintf(1, "words = %i\n", ft_words(line));
-/*	while (line[i])
+/*	while (tab[i])
 	{
-		i = separate_comma(line, i);
+		dprintf(1, "|%s|\n", tab[i]);
+		i++;
+	}
+	i = 0;
+*/	while (line[i])
+	{
+		k = 0;
+		i = separate_scolon(line, i);
 		str = ft_strsub(line, j, i);
-		ft_handle_command(&str, envir);
+		tab = ft_split_com(str);
+		while (tab[k])
+		{
+		dprintf(1, "|%s|\n", tab[k]);
+		k++;
+		}
+//		dprintf(1, "|%s|\n", str);
+//		ft_handle_command(&str, envir);
 		if (str)
 			free(str);
 		if (line[i])
 			i++;
 		j = i;
-	}*/
+	}
 }
 
 int		ft_prompt(t_envlist **envir)
@@ -382,6 +305,7 @@ int		ft_prompt(t_envlist **envir)
 	line = NULL;
 	if (i)
 	{
+		/**** Print Dir ****/
 		ft_putstr("$> ");
 		i = 0;
 	}
