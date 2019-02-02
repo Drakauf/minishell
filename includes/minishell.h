@@ -6,7 +6,7 @@
 /*   By: shthevak <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/01/29 01:50:41 by shthevak     #+#   ##    ##    #+#       */
-/*   Updated: 2019/02/01 14:09:59 by shthevak    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/02/02 11:01:47 by shthevak    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -60,6 +60,9 @@ int						separate_scolon(char *line, int k);
 char					**ft_split_com(char *str);
 int						ft_words(char *line);
 int						ft_wordlen(char *str, size_t i);
+int						ft_tab_len(char **tab);
+char					**ft_handle_tab(char **tab);
+
 
 /*
 ** V

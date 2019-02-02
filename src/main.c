@@ -6,7 +6,7 @@
 /*   By: shthevak <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/01/28 18:24:11 by shthevak     #+#   ##    ##    #+#       */
-/*   Updated: 2019/02/01 13:43:08 by shthevak    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/02/02 12:03:26 by shthevak    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -136,17 +136,7 @@ void	ft_copy_com(char **str, char **new, t_envlist **envir)
 			i++;
 	}
 }
-/*
-size_t	ft_wordlen(char *s, size_t i)
-{
-	size_t j;
 
-	j = 0;
-	while (s[i + j] && (s[i + j] <= 9 || s[i + j] >= 13) && s[i + j] != ' ')
-		j++;
-	return (j);
-}
-*/
 char	**ft_com_exe(char *s)
 {
 	int i;
@@ -163,17 +153,17 @@ char	**ft_com_exe(char *s)
 		return (NULL);
 	tab[2] = NULL;
 	if (!((tab[0]) = ft_strsub(s, i, j)))
-			return (NULL);
-//	dprintf(1, "tab0 =%s\n", (tab)[0]);
+		return (NULL);
+	//	dprintf(1, "tab0 =%s\n", (tab)[0]);
 	i += j;
 	while (s[i] && ((s[i] >= 9 && s[i] <= 13) || s[i] == ' '))
 		i++;
 	if (!((tab[1]) = ft_strsub(s, i, ft_strlen(s))))
 	{
-			ft_free_tab(tab);
-			return (NULL);
+		ft_free_tab(tab);
+		return (NULL);
 	}
-//	dprintf(1, "tab1 =%s\n", (tab)[1]);
+	//	dprintf(1, "tab1 =%s\n", (tab)[1]);
 	ft_free_tab(tab);
 	tab = NULL;
 	return (tab);
@@ -189,75 +179,11 @@ void	ft_handle_command(char **str, t_envlist **envir)
 	ft_command_len(str, envir, &l);
 	com = ft_strnew(l);
 	ft_copy_com(str, &com, envir);
-//	dprintf(1, "%s\n", com);
+	//	dprintf(1, "%s\n", com);
 	ctab = ft_com_exe(com);
 	free(com);
 }
-/*
-int		ft_words(char *line)
-{
-	int i;
-	int g;
-	int s;
 
-	i = 0;
-	g = 0;
-	s = 0;
-	if (!line)
-		return (0);
-	while (line[i])
-	{
-		while (line[i] && ((line[i] <= 13 && line[i] >= 9) || line[i] == ' '))
-		{
-			i++;
-		}
-		if (line[i])
-		{
-			if (line[i] && (line[i] == '\'' || line[i] == '"'))
-			{
-				ft_last_quote(line, line[i], &i, &g);
-				i++;
-			}
-			else
-			{
-				while (line[i] && (line[i] >= 13 || line[i] <= 9) && line[i] != ' ')
-					i++;
-			}
-			s++;
-		(line[i]) ? i++ : 0;
-		}
-	}
-	return (s);
-}
-
-char	**ft_commandetab(char *str)
-{
-	int i;
-	int j;
-	char	**tab;
-
-	i = 0;
-	j = 0;
-	if (!(tab = malloc(sizeof(tab) * ft_words(str) + 1)))
-		return (NULL);
-	while (str[i])
-	{
-		while (str[i] && ((str[i] <= 13 && str[i] >= 9) || str[i] == ' '))
-			i++;
-		if (str[i] && (str[i] == '\'' || str[i] == '"'))
-			tab[j++] = ft_strsub(str, i, ft_last_nquote(str, str[i], &i) +1);
-		else if (str[i])
-		{
-			tab[j++] = ft_strsub(str, i, ft_wordlen(str, i));
-			i += ft_wordlen(str, i);
-		}
-		if (str[i])
-			i++;
-	}
-	tab[j] = NULL;
-	return (tab);
-}
-*/
 void	ft_parse_line(char *line, t_envlist **envir)
 {
 	char	*str;
@@ -265,34 +191,37 @@ void	ft_parse_line(char *line, t_envlist **envir)
 	int 	i;
 	int 	j;
 
-
 	i = 0;
 	j = 0;
-	int k;
 	str = NULL;
-/*	while (tab[i])
+//	int k;
+	while (line[i])
 	{
-		dprintf(1, "|%s|\n", tab[i]);
-		i++;
-	}
-	i = 0;
-*/	while (line[i])
-	{
-		k = 0;
 		i = separate_scolon(line, i);
-		str = ft_strsub(line, j, i);
+		((str = ft_strsub(line, j, i))) ? 0: exit(0);
+//		dprintf(1, "Here");
 		tab = ft_split_com(str);
-		while (tab[k])
+/****************/
+
+//		tab ? tab = ft_handle_tab(tab) : 0;
+/****************/
+/**/
+		int k;
+		k = 0;
+		if (tab)
 		{
-		dprintf(1, "|%s|\n", tab[k]);
-		k++;
+			while (tab[k])
+			{
+				dprintf(1, "|%s|\n", tab[k]);
+				k++;
+			}
 		}
-//		dprintf(1, "|%s|\n", str);
+
+/**/
 //		ft_handle_command(&str, envir);
-		if (str)
-			free(str);
-		if (line[i])
-			i++;
+		str ? free(str): 0;
+//		ft_free_tab(tab);
+		line[i] ? i++: 0;
 		j = i;
 	}
 }
