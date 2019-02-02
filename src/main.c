@@ -6,7 +6,7 @@
 /*   By: shthevak <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/01/28 18:24:11 by shthevak     #+#   ##    ##    #+#       */
-/*   Updated: 2019/02/02 12:03:26 by shthevak    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/02/02 13:11:33 by shthevak    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -48,8 +48,8 @@ void	ft_command_len(char **str, t_envlist **envir, int *l)
 			(*l)++;
 			i++;
 		}
-		else if (com[i] == '"' || com[i] == '\'')
-			ft_last_quote(com, com[i], &i, l);
+//		else if (com[i] == '"' || com[i] == '\'')
+//			ft_last_dquote(com, com[i], &i, l);
 		else if (com[i] == '$')
 		{
 			(*l) += ft_var_len(com, i, envir);
@@ -70,7 +70,7 @@ void	ft_getin_quote(char **str, char **new, int *i, int *j)
 	k = 0;
 	m = 0;
 	c = (*str)[(*i)];
-	ft_last_quote((*str) + (*i + 1), c, &m, &k);
+//	ft_last_quote((*str) + (*i + 1), c, &m, &k);
 	if (k != 0)
 	{
 		while ((*str)[*i])
@@ -220,7 +220,7 @@ void	ft_parse_line(char *line, t_envlist **envir)
 /**/
 //		ft_handle_command(&str, envir);
 		str ? free(str): 0;
-//		ft_free_tab(tab);
+		ft_free_tab(tab);
 		line[i] ? i++: 0;
 		j = i;
 	}

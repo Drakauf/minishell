@@ -6,7 +6,7 @@
 /*   By: shthevak <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/12/20 16:06:09 by shthevak     #+#   ##    ##    #+#       */
-/*   Updated: 2019/01/28 14:19:01 by shthevak    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/02/02 12:49:19 by shthevak    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -50,7 +50,7 @@ char	*malloc_str(char *str, char **line)
 	if (str[i] == '\n')
 	{
 		tmp = str;
-		str = ft_strsub(str, i + 1, ft_strlen(str) - i - 1);
+		str = ft_strsub(str, i + 1, ft_strlen(str) - i + 1);
 		ft_strdel(&tmp);
 	}
 	else
