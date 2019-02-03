@@ -6,29 +6,37 @@
 /*   By: shthevak <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/01/28 18:24:11 by shthevak     #+#   ##    ##    #+#       */
-/*   Updated: 2019/02/02 13:11:33 by shthevak    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/02/03 15:46:14 by shthevak    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int	ft_var_len(char *com, int i, t_envlist **envir)
+int	ft_var_len(char *com, int *i, t_envlist **envir)
 {
 	char	**tab;
 	t_envlist *list;
 
 	list = *envir;
-	tab = ft_strsplit(com + i +1, ' ');
+	tab = ft_strsplit(com + *i +1, ' ');
 	while (list)
 	{
 		if (ft_strcmp(tab[0], list->var) == 0)
 		{
+//			dprintf(1, "tab[0] = |%s| Found\n", tab[0]);
 			ft_free_tab(tab);
+			while (com[*i] && (com[*i] >= 13 || com[*i] <= 9 )
+					&& com[*i] != ' ')
+				(*i)++;
 			return (ft_strlen(list->val));
 		}
 		list = list->next;
 	}
+		while (com[*i] && (com[*i] >= 13 || com[*i] <= 9 )
+					&& com[*i] != ' ')
+				(*i)++;
+//	dprintf(1, "tab[0] = |%s| Not Found\n", tab[0]);	
 	ft_free_tab(tab);
 	return (0);
 }
@@ -52,9 +60,9 @@ void	ft_command_len(char **str, t_envlist **envir, int *l)
 //			ft_last_dquote(com, com[i], &i, l);
 		else if (com[i] == '$')
 		{
-			(*l) += ft_var_len(com, i, envir);
-			while (com[i + 1] && (com[i + 1] >= 13 || com[i + 1] <= 9 )
-					&& com[i + 1] != ' ')
+			(*l) += ft_var_len(com, &i, envir);
+//			while (com[i + 1] && (com[i + 1] >= 13 || com[i + 1] <= 9 )
+//					&& com[i + 1] != ' ')
 				i++;
 		}
 		com[i] ? i++ : 0;
@@ -180,7 +188,7 @@ void	ft_handle_command(char **str, t_envlist **envir)
 	com = ft_strnew(l);
 	ft_copy_com(str, &com, envir);
 	//	dprintf(1, "%s\n", com);
-	ctab = ft_com_exe(com);
+//	ctab = ft_com_exe(com);
 	free(com);
 }
 
@@ -203,10 +211,10 @@ void	ft_parse_line(char *line, t_envlist **envir)
 		tab = ft_split_com(str);
 /****************/
 
-//		tab ? tab = ft_handle_tab(tab) : 0;
+		tab ? tab = ft_handle_tab(tab, envir) : 0;
 /****************/
 /**/
-		int k;
+/*		int k;
 		k = 0;
 		if (tab)
 		{
@@ -216,11 +224,13 @@ void	ft_parse_line(char *line, t_envlist **envir)
 				k++;
 			}
 		}
-
+*/
 /**/
 //		ft_handle_command(&str, envir);
 		str ? free(str): 0;
+		dprintf(1, "|free new|\n");
 		ft_free_tab(tab);
+				dprintf(1, "|freed new|\n");
 		line[i] ? i++: 0;
 		j = i;
 	}

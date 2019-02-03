@@ -6,7 +6,7 @@
 /*   By: shthevak <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/02/01 11:28:16 by shthevak     #+#   ##    ##    #+#       */
-/*   Updated: 2019/02/02 13:20:28 by shthevak    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/02/03 15:46:19 by shthevak    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -27,7 +27,8 @@ int		ft_last_dnquote(char *str, char c, int *i)
 		&& str[m + *i + 1] >= 9) || str[m + *i + 1] == ' '))))
 		{
 			while (str[m + *i + 1] && !((str[m + *i + 1] >= 9 &&
-			str[m + *i + 1] <= 13) || str[m + *i + 1] == ' '))
+			str[m + *i + 1] <= 13) || str[m + *i + 1] == ' ' ||
+			str[m + *i + 1] == '\'' || str[m + *i + 1] == '"'))
 				m++;
 			l = m;
 			break ;
@@ -55,7 +56,8 @@ void	ft_last_dquote(char *str, char c, int *i, int *k)
 		&& str[m + *i + 1] >= 9) || str[m + *i + 1] == ' '))))
 		{
 			while (str[m + *i + 1] && !((str[m + *i + 1] >= 9 &&
-			str[m + *i + 1] <= 13) || str[m + *i + 1] == ' '))
+			str[m + *i + 1] <= 13) || str[m + *i + 1] == ' ' ||
+			str[m + *i + 1] == '\'' || str[m + *i + 1] == '"'))
 				m++;
 			l = m;
 			break ;
@@ -81,7 +83,8 @@ int		ft_last_snquote(char *str, char c, int *i)
 		if (str[m + *i] == c)
 		{
 			while (str[m + *i + 1] && !((str[m + *i + 1] >= 9 &&
-			str[m + *i + 1] <= 13) || str[m + *i + 1] == ' '))
+			str[m + *i + 1] <= 13) || str[m + *i + 1] == ' ' ||
+			str[m + *i + 1] == '\'' || str[m + *i + 1] == '"'))
 				m++;
 			l = m;
 			break ;
@@ -107,7 +110,8 @@ void	ft_last_squote(char *str, char c, int *i, int *k)
 		if (str[m + *i] == c)
 		{
 			while (str[m + *i + 1] && !((str[m + *i + 1] >= 9 &&
-			str[m + *i + 1] <= 13) || str[m + *i + 1] == ' '))
+			str[m + *i + 1] <= 13) || str[m + *i + 1] == ' ' ||
+			str[m + *i + 1] == '\'' || str[m + *i + 1] == '"'))
 				m++;
 			l = m;
 			break ;
