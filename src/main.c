@@ -6,40 +6,13 @@
 /*   By: shthevak <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/01/28 18:24:11 by shthevak     #+#   ##    ##    #+#       */
-/*   Updated: 2019/02/03 15:46:14 by shthevak    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/02/04 18:20:47 by shthevak    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-
-int	ft_var_len(char *com, int *i, t_envlist **envir)
-{
-	char	**tab;
-	t_envlist *list;
-
-	list = *envir;
-	tab = ft_strsplit(com + *i +1, ' ');
-	while (list)
-	{
-		if (ft_strcmp(tab[0], list->var) == 0)
-		{
-//			dprintf(1, "tab[0] = |%s| Found\n", tab[0]);
-			ft_free_tab(tab);
-			while (com[*i] && (com[*i] >= 13 || com[*i] <= 9 )
-					&& com[*i] != ' ')
-				(*i)++;
-			return (ft_strlen(list->val));
-		}
-		list = list->next;
-	}
-		while (com[*i] && (com[*i] >= 13 || com[*i] <= 9 )
-					&& com[*i] != ' ')
-				(*i)++;
-//	dprintf(1, "tab[0] = |%s| Not Found\n", tab[0]);	
-	ft_free_tab(tab);
-	return (0);
-}
+/*
 void	ft_command_len(char **str, t_envlist **envir, int *l)
 {
 	int		i;
@@ -69,6 +42,7 @@ void	ft_command_len(char **str, t_envlist **envir, int *l)
 	}
 }
 
+*/
 void	ft_getin_quote(char **str, char **new, int *i, int *j)
 {
 	int k;
@@ -119,7 +93,7 @@ int	ft_getvar(char	**str, char **new, int *i, t_envlist **envir)
 	}
 	return (0);
 }
-
+/*
 void	ft_copy_com(char **str, char **new, t_envlist **envir)
 {
 	int i;
@@ -144,7 +118,7 @@ void	ft_copy_com(char **str, char **new, t_envlist **envir)
 			i++;
 	}
 }
-
+*/
 char	**ft_com_exe(char *s)
 {
 	int i;
@@ -176,7 +150,7 @@ char	**ft_com_exe(char *s)
 	tab = NULL;
 	return (tab);
 }
-
+/*
 void	ft_handle_command(char **str, t_envlist **envir)
 {
 	int		l;
@@ -191,7 +165,7 @@ void	ft_handle_command(char **str, t_envlist **envir)
 //	ctab = ft_com_exe(com);
 	free(com);
 }
-
+*/
 void	ft_parse_line(char *line, t_envlist **envir)
 {
 	char	*str;

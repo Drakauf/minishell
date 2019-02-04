@@ -6,7 +6,7 @@
 #    By: shthevak <marvin@le-101.fr>                +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2019/01/28 15:19:07 by shthevak     #+#   ##    ##    #+#        #
-#    Updated: 2019/02/03 14:05:21 by shthevak    ###    #+. /#+    ###.fr      #
+#    Updated: 2019/02/04 17:21:02 by shthevak    ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
@@ -34,8 +34,8 @@ PRT_NAME = libftprintf.a
 
 INC_NAME =minishell.h
 
-SRC_NAME = main.c drakauf.c charizard.c env_struct.c ft_free.c quote.c dquote.c\
-		   semicolon.c split_com.c handle_tab.c
+SRC_NAME = main.c drakauf.c charizard.c env_struct.c ft_free.c squote.c\
+		   dquote.c semicolon.c split_com.c handle_tab.c var.c
 
 # **************************************************************************** #
 #  									VAR                                        #
