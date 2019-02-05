@@ -6,7 +6,7 @@
 /*   By: shthevak <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/02/01 11:28:16 by shthevak     #+#   ##    ##    #+#       */
-/*   Updated: 2019/02/04 18:20:49 by shthevak    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/02/05 13:46:14 by shthevak    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -38,8 +38,7 @@ int		ft_last_snquote(char *str, char c, int *i)
 		if (str[m + *i] == c)
 		{
 			while (str[m + *i + 1] && !((str[m + *i + 1] >= 9 &&
-			str[m + *i + 1] <= 13) || str[m + *i + 1] == ' ' /*||
-			str[m + *i + 1] == '\'' || str[m + *i + 1] == '"'*/))
+			str[m + *i + 1] <= 13) || str[m + *i + 1] == ' '))
 				m++;
 			l = m;
 			break ;
@@ -65,8 +64,7 @@ void	ft_last_squote(char *str, char c, int *i, int *k)
 		if (str[m + *i] == c)
 		{
 			while (str[m + *i + 1] && !((str[m + *i + 1] >= 9 &&
-			str[m + *i + 1] <= 13) || str[m + *i + 1] == ' '/*||
-			str[m + *i + 1] == '\'' || str[m + *i + 1] == '"'*/))
+			str[m + *i + 1] <= 13) || str[m + *i + 1] == ' '))
 				m++;
 			l = m;
 			break ;

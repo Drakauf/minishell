@@ -6,7 +6,7 @@
 /*   By: shthevak <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/02/02 10:55:59 by shthevak     #+#   ##    ##    #+#       */
-/*   Updated: 2019/02/04 18:20:46 by shthevak    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/02/05 13:46:09 by shthevak    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -20,9 +20,10 @@ void	ft_arg_copy(char *str, char **new, t_envlist **envir)
 
 	i = 0;
 	j = 0;
-	while(str[i])
+	while (str[i])
 	{
-		if (str[i] != '\\' && str[i] != '$' && str[i] != '\'' && str[i] != '"')
+		if (str[i] != '\\' && str[i] != '$' && str[i] != '\'' && str[i] != '"'
+				&& str[i] != '~')
 			(*new)[j++] = str[i];
 		else if (str[i] == '\\')
 		{
@@ -31,9 +32,9 @@ void	ft_arg_copy(char *str, char **new, t_envlist **envir)
 		}
 		else if (str[i] == '\'')
 			ft_getin_squote(str, new, &i, &j);
-//		else if (str[i] == '"')
-//			
-		else if (str[i] == '$')
+		else if (str[i] == '"')
+			j += ft_getin_dquote(str, new, &i, envir);
+		else if (str[i] == '$' || str[i] == '~')
 			j += ft_copy_var(str, new, &i, envir);
 		if (str[i])
 			i++;
@@ -49,7 +50,8 @@ int		ft_arg_len(char *str, t_envlist **envir)
 	l = 0;
 	while (str[i])
 	{
-		if (str[i] != '\\' && str[i] != '$' && str[i] != '\'' && str[i] != '"')
+		if (str[i] != '\\' && str[i] != '$' && str[i] != '\'' && str[i] != '"'
+			&& str[i] != '~')
 			l++;
 		else if (str[i] == '\\')
 		{
@@ -60,10 +62,9 @@ int		ft_arg_len(char *str, t_envlist **envir)
 			l += ft_last_snquote(str, str[i], &i);
 		else if (str[i] == '"')
 			l += ft_dquote_len(str, &i, envir);
-		else if (str[i] == '$')
+		else if (str[i] == '$' || str[i] == '~')
 			l += ft_var_len(str, &i, envir);
-		if (str[i])
-			i++;
+		str[i] ? i++ : 0;
 	}
 	return (l);
 }
@@ -86,7 +87,6 @@ char	**ft_handle_tab(char **tab, t_envlist **envir)
 		new[i] = ft_strnew(ft_arg_len(tab[i], envir));
 		ft_arg_copy(tab[i], &(new[i]), envir);
 		dprintf(1, "tab[i] = |%s|\nnew[i] = |%s|\n", tab[i], new[i]);
-//		new[i] = ft_strdup(tab[i]);
 		i++;
 	}
 	ft_free_tab(tab);

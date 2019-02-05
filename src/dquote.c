@@ -6,12 +6,61 @@
 /*   By: shthevak <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/02/01 11:27:12 by shthevak     #+#   ##    ##    #+#       */
-/*   Updated: 2019/02/04 17:18:38 by shthevak    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/02/05 13:46:07 by shthevak    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+int		ft_break_dquote(char *str)
+{
+	int		m;
+	int		l;
+
+	m = 1;
+	l = 0;
+	while (str[m])
+	{
+		if (str[m] == '"' && ((m > 0 && str[m - 1] != '\\') ||
+		(str[m - 1] != '\\')))
+		{
+			l = m;
+			break ;
+		}
+		m++;
+	}
+	return (l);
+}
+
+int	ft_getin_dquote(char *str, char **new, int *i, t_envlist **envir)
+{
+	int 	k;
+	char	*c;
+	int		r;
+
+	r = 0;
+	if ((k = ft_break_dquote(str + *i)))
+	{
+		c = ft_strsub(str, *i + 1, k - 1);
+		(*i) += k;
+		k = ft_strlen(*new);
+		while (c[r])
+		{
+			if (c[r] != '\\' && c[r] != '$')
+				(*new)[k++] = c[r];
+			else if (c[r] == '\\')
+			{
+				r++;
+				(*new)[k++] = c[r];
+			}
+			else if (c[r] == '$')
+				k += ft_copy_var(c, new, &r, envir);
+			c[r] ? r++ : 0;
+		}
+	}
+	return (r);
+}
 
 int		ft_last_dnquote(char *str, char c, int *i)
 {
@@ -28,7 +77,7 @@ int		ft_last_dnquote(char *str, char c, int *i)
 		{
 			while (str[m + *i + 1] && !((str[m + *i + 1] >= 9 &&
 			str[m + *i + 1] <= 13) || str[m + *i + 1] == ' '/* ||
-						str[m + *i + 1] == '\'' || str[m + *i + 1] == '"'*/))
+			str[m + *i + 1] == '\'' || str[m + *i + 1] == '"'*/))
 				m++;
 			l = m;
 			break ;
@@ -57,7 +106,7 @@ void	ft_last_dquote(char *str, char c, int *i, int *k)
 		{
 			while (str[m + *i + 1] && !((str[m + *i + 1] >= 9 &&
 			str[m + *i + 1] <= 13) || str[m + *i + 1] == ' '/* ||
-						str[m + *i + 1] == '\'' || str[m + *i + 1] == '"'*/))
+			str[m + *i + 1] == '\'' || str[m + *i + 1] == '"'*/))
 				m++;
 			l = m;
 			break ;
@@ -81,12 +130,12 @@ int		ft_dquote_len(char *s, int *i, t_envlist **envir)
 	while (s[++m])
 	{
 		if (s[m] == '"' && ((m > 0 && s[m - 1] != '\\') || (s[m - 1] != '\\' &&
-						(!s[m + 1] || (s[m + 1] <= 13 && s[m + 1] >= 9)
-						 || s[m + 1] == ' '))))
+		(!s[m + 1] || (s[m + 1] <= 13 && s[m + 1] >= 9)
+		|| s[m + 1] == ' '))))
 		{
 			while (s[m + 1] && !((s[m + 1] >= 9 &&
-							s[m + 1] <= 13) || s[m + 1] == ' ' ||
-						s[m + 1] == '\'' || s[m + 1] == '"'))
+			s[m + 1] <= 13) || s[m + 1] == ' ' ||
+			s[m + 1] == '\'' || s[m + 1] == '"'))
 			{
 				l++;
 				m++;

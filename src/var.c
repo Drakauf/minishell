@@ -6,7 +6,7 @@
 /*   By: shthevak <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/02/04 12:50:36 by shthevak     #+#   ##    ##    #+#       */
-/*   Updated: 2019/02/04 18:20:38 by shthevak    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/02/05 13:00:42 by shthevak    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -15,23 +15,26 @@
 
 int		ft_copy_var(char *str, char **new, int *i, t_envlist **envir)
 {
-	char	*var;
-	t_envlist *list;
+	char		*var;
+	t_envlist	*list;
 
 	list = *envir;
-	var = ft_split_var(str + *i + 1);
+	if (str[(*i)] == '~')
+		var = ft_strdup("HOME");
+	else
+		var = ft_split_var(str + *i + 1);
 	while (list)
 	{
 		if (ft_strcmp(var, list->var) == 0)
 		{
 			*new = ft_strcat(*new, list->val);
-			*i = (*i) + ft_strlen(var);
+			*i = (*i) + (str[*i] == '~' ? 0 : ft_strlen(var));
 			ft_strdel(&var);
 			return (ft_strlen(list->val));
 		}
 		list = list->next;
 	}
-	*i = (*i) + ft_strlen(var);
+	*i = (*i) + (str[*i] == '~' ? 0 : ft_strlen(var));
 	ft_strdel(&var);
 	return (0);
 }
@@ -42,18 +45,23 @@ int		ft_var_len(char *com, int *i, t_envlist **envir)
 	t_envlist	*list;
 
 	list = *envir;
-	var = ft_split_var(com + *i + 1);
+	if (com[(*i)] == '~')
+	{
+		var = ft_strdup("HOME");
+	}
+	else
+		var = ft_split_var(com + *i + 1);
 	while (list)
 	{
 		if (ft_strcmp(var, list->var) == 0)
 		{
-			*i = (*i) + ft_strlen(var);
+			*i = (*i) + (com[(*i)] == '~' ? 0 : ft_strlen(var));
 			ft_strdel(&var);
 			return (ft_strlen(list->val));
 		}
 		list = list->next;
 	}
-	*i = (*i) + ft_strlen(var);
+	*i = (*i) + (com[*i] == '~' ? 0 : ft_strlen(var));
 	ft_strdel(&var);
 	return (0);
 }
