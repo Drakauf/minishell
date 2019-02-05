@@ -6,7 +6,7 @@
 /*   By: shthevak <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/02/01 11:27:12 by shthevak     #+#   ##    ##    #+#       */
-/*   Updated: 2019/02/05 13:46:07 by shthevak    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/02/05 15:03:16 by shthevak    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -58,6 +58,7 @@ int	ft_getin_dquote(char *str, char **new, int *i, t_envlist **envir)
 				k += ft_copy_var(c, new, &r, envir);
 			c[r] ? r++ : 0;
 		}
+		ft_strdel(&c);
 	}
 	return (r);
 }

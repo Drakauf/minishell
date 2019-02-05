@@ -6,7 +6,7 @@
 /*   By: shthevak <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/01/28 18:24:11 by shthevak     #+#   ##    ##    #+#       */
-/*   Updated: 2019/02/05 13:46:16 by shthevak    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/02/05 16:38:56 by shthevak    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -29,7 +29,7 @@ void	ft_parse_line(char *line, t_envlist **envir)
 		((str = ft_strsub(line, j, i))) ? 0: exit(0);
 		tab = ft_split_com(str);
 		tab[0] ? tab = ft_handle_tab(tab, envir) : 0;
-	
+		tab[0] ? ft_to_execute(tab,envir): 0;
 		str ? free(str): 0;
 		ft_free_tab(tab);
 		line[i] ? i++: 0;
@@ -51,12 +51,12 @@ int		ft_prompt(t_envlist **envir)
 	}
 	if (get_next_line(0, &line))
 	{
-		ft_parse_line(line, envir);
 		if (ft_strcmp("exit", line) == 0)
 		{
 			free(line);
 			return (0);
 		}
+		ft_parse_line(line, envir);
 		free(line);
 		line = NULL;
 		i = 1;
