@@ -6,7 +6,7 @@
 /*   By: shthevak <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/02/05 16:39:01 by shthevak     #+#   ##    ##    #+#       */
-/*   Updated: 2019/02/05 16:48:01 by shthevak    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/02/06 13:56:24 by shthevak    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -39,5 +39,14 @@ int		ft_valid_path(char *str)
 		ft_printf("%s: Can't be executed\n", str);
 		return (0);
 	}
+	return (1);
+}
+
+int		ft_valid_execp(char *str)
+{
+	if ((access(str, F_OK) == -1))
+		return (0);
+	if ((access(str, X_OK) == -1))
+		return (0);
 	return (1);
 }

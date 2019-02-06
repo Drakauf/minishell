@@ -6,7 +6,7 @@
 /*   By: shthevak <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/02/01 11:27:12 by shthevak     #+#   ##    ##    #+#       */
-/*   Updated: 2019/02/05 15:03:16 by shthevak    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/02/06 14:08:25 by shthevak    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -33,9 +33,9 @@ int		ft_break_dquote(char *str)
 	return (l);
 }
 
-int	ft_getin_dquote(char *str, char **new, int *i, t_envlist **envir)
+int		ft_getin_dquote(char *str, char **new, int *i, t_envlist **envir)
 {
-	int 	k;
+	int		k;
 	char	*c;
 	int		r;
 
@@ -50,10 +50,7 @@ int	ft_getin_dquote(char *str, char **new, int *i, t_envlist **envir)
 			if (c[r] != '\\' && c[r] != '$')
 				(*new)[k++] = c[r];
 			else if (c[r] == '\\')
-			{
-				r++;
-				(*new)[k++] = c[r];
-			}
+				(*new)[k++] = c[++r];
 			else if (c[r] == '$')
 				k += ft_copy_var(c, new, &r, envir);
 			c[r] ? r++ : 0;
@@ -77,8 +74,7 @@ int		ft_last_dnquote(char *str, char c, int *i)
 		&& str[m + *i + 1] >= 9) || str[m + *i + 1] == ' '))))
 		{
 			while (str[m + *i + 1] && !((str[m + *i + 1] >= 9 &&
-			str[m + *i + 1] <= 13) || str[m + *i + 1] == ' '/* ||
-			str[m + *i + 1] == '\'' || str[m + *i + 1] == '"'*/))
+			str[m + *i + 1] <= 13) || str[m + *i + 1] == ' '))
 				m++;
 			l = m;
 			break ;
@@ -106,8 +102,7 @@ void	ft_last_dquote(char *str, char c, int *i, int *k)
 		&& str[m + *i + 1] >= 9) || str[m + *i + 1] == ' '))))
 		{
 			while (str[m + *i + 1] && !((str[m + *i + 1] >= 9 &&
-			str[m + *i + 1] <= 13) || str[m + *i + 1] == ' '/* ||
-			str[m + *i + 1] == '\'' || str[m + *i + 1] == '"'*/))
+			str[m + *i + 1] <= 13) || str[m + *i + 1] == ' '))
 				m++;
 			l = m;
 			break ;

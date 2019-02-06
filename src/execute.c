@@ -6,7 +6,7 @@
 /*   By: shthevak <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/02/05 14:36:33 by shthevak     #+#   ##    ##    #+#       */
-/*   Updated: 2019/02/05 17:23:00 by shthevak    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/02/06 14:23:30 by shthevak    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -15,8 +15,8 @@
 
 void	execute(char *exec, char **tab)
 {
-	int        w;
-	pid_t    p;
+	int		w;
+	pid_t	p;
 
 	p = fork();
 	if (p == 0)
@@ -27,21 +27,30 @@ void	execute(char *exec, char **tab)
 
 void	ft_exec(char **tab, t_envlist **envir)
 {
-	char *str;
-	char **path;
+	char	*str;
+	char	**path;
+	char	*execp;
+	int		j;
+	int		i;
 
 	str = ft_strdup(ft_get_path(envir));
-//	ft_free_tab(str);
-	dprintf(1, "Here\n");
-	int i;
-	i = 0;
-	dprintf(1, "%s\n", str);
+	i = -1;
+	j = 0;
 	path = ft_strsplit(str, ':');
-	while (path[i])
+	while (path[++i])
 	{
-		dprintf(1, "%s\n", path[i]);
-		i++;
+		execp = ft_strjoin(path[i], "/");
+		execp = ft_strjoinfree(&execp, tab[0]);
+		if (ft_valid_execp(execp))
+		{
+			execute(execp, tab);
+			j++;
+		}
+		ft_strdel(&execp);
 	}
+	(j == 0) ? ft_printf("%s: Command not found\n", tab[0]) : 0;
+	ft_free_tab(path);
+	ft_strdel(&str);
 }
 
 void	ft_to_execute(char **tab, t_envlist **envir)

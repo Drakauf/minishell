@@ -6,7 +6,7 @@
 /*   By: shthevak <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/02/05 16:48:26 by shthevak     #+#   ##    ##    #+#       */
-/*   Updated: 2019/02/05 17:23:02 by shthevak    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/02/06 14:23:08 by shthevak    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -28,7 +28,5 @@ int		ft_is_builtin(char **tab, t_envlist **envir)
 		j = ft_printf("unsetenv to code\n");
 	else if (ft_strcmp(tab[0], "env") == 0)
 		j = ft_printf("env to code\n");
-	else if (ft_strcmp(tab[0], "exit") == 0)
-		j = ft_printf("exit to code\n");
 	return (j);
 }

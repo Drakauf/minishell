@@ -6,7 +6,7 @@
 /*   By: shthevak <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/02/02 10:55:59 by shthevak     #+#   ##    ##    #+#       */
-/*   Updated: 2019/02/05 17:23:05 by shthevak    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/02/06 14:10:49 by shthevak    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -86,7 +86,6 @@ char	**ft_handle_tab(char **tab, t_envlist **envir)
 	{
 		new[i] = ft_strnew(ft_arg_len(tab[i], envir));
 		ft_arg_copy(tab[i], &(new[i]), envir);
-		dprintf(1, "tab[i] = |%s|\nnew[i] = |%s|\n", tab[i], new[i]);
 		i++;
 	}
 	ft_free_tab(tab);
