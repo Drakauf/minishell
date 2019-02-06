@@ -6,7 +6,7 @@
 #    By: shthevak <marvin@le-101.fr>                +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2019/01/28 15:19:07 by shthevak     #+#   ##    ##    #+#        #
-#    Updated: 2019/02/05 16:49:07 by shthevak    ###    #+. /#+    ###.fr      #
+#    Updated: 2019/02/06 15:45:55 by shthevak    ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
@@ -36,7 +36,7 @@ INC_NAME =minishell.h
 
 SRC_NAME = main.c drakauf.c charizard.c env_struct.c ft_free.c squote.c\
 		   dquote.c semicolon.c split_com.c handle_tab.c var.c execute.c\
-		   path.c builtin_handle.c
+		   path.c builtin_handle.c cd.c
 
 # **************************************************************************** #
 #  									VAR                                        #

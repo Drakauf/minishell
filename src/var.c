@@ -6,12 +6,26 @@
 /*   By: shthevak <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/02/04 12:50:36 by shthevak     #+#   ##    ##    #+#       */
-/*   Updated: 2019/02/05 17:23:06 by shthevak    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/02/06 17:12:45 by shthevak    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+char	*ft_get_val(char *str, t_envlist **envir)
+{
+	t_envlist	*list;
+
+	list = *envir;
+	while (list)
+	{
+		if (ft_strcmp(str, list->var) == 0)
+			return (list->val);
+		list = list->next;
+	}
+	return (NULL);
+}
 
 char	*ft_get_path(t_envlist **envir)
 {

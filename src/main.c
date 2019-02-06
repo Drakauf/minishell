@@ -6,7 +6,7 @@
 /*   By: shthevak <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/01/28 18:24:11 by shthevak     #+#   ##    ##    #+#       */
-/*   Updated: 2019/02/06 14:23:00 by shthevak    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/02/06 17:33:25 by shthevak    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -44,11 +44,12 @@ void	ft_print_prompt(t_envlist **envir)
 
 	getcwd(dir, 999);
 	if (ft_strcmp(dir, "/Users/shthevak") == 0)
-		ft_printf("[red]~ [eoc]",dir);
+		ft_printf("[red]~ [eoc]", dir);
 	else
 	{
 		tab = ft_strsplit(dir, '/');
-		ft_printf("[green]=> [blue]%s [eoc]", tab[ft_tab_len(tab) - 1]);
+		ft_printf("[green]=>[eoc] [blue]%s [eoc]", tab[ft_tab_len(tab) - 1]);
+		ft_free_tab(tab);
 	}
 }
 

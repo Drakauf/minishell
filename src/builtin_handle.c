@@ -6,12 +6,38 @@
 /*   By: shthevak <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/02/05 16:48:26 by shthevak     #+#   ##    ##    #+#       */
-/*   Updated: 2019/02/06 14:23:08 by shthevak    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/02/06 17:36:07 by shthevak    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+int		ft_echo(char **tab, t_envlist **envir)
+{
+	int i;
+	int j;
+	int k;
+
+	j = 0;
+	if (tab[1] && ft_strcmp("-n", tab[1]) == 0)
+	{
+		j++;
+		i = 2;
+	}
+	else
+		i = 1;
+	k = 0;
+	while (tab[i])
+	{
+		ft_printf("%s", tab[i]);
+		k != 0 ? ft_printf(" ") : 0;
+		k++;
+		i++;
+	}
+	j == 0 ? ft_printf("\n") : ft_printf("[uwhite][black]%%[eoc][eou]\n");
+	return (1);
+}
 
 int		ft_is_builtin(char **tab, t_envlist **envir)
 {
@@ -19,9 +45,9 @@ int		ft_is_builtin(char **tab, t_envlist **envir)
 
 	j = 0;
 	if (ft_strcmp(tab[0], "echo") == 0)
-		j = ft_printf("echo to code\n");
+		j = ft_echo(tab, envir);
 	else if (ft_strcmp(tab[0], "cd") == 0)
-		j = ft_printf("cd to code\n");
+		j = ft_cd(tab, envir);
 	else if (ft_strcmp(tab[0], "setenv") == 0)
 		j = ft_printf("setenv to code\n");
 	else if (ft_strcmp(tab[0], "unsetenv") == 0)
