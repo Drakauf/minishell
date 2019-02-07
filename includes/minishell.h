@@ -6,7 +6,7 @@
 /*   By: shthevak <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/01/29 01:50:41 by shthevak     #+#   ##    ##    #+#       */
-/*   Updated: 2019/02/06 17:33:36 by shthevak    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/02/07 13:46:24 by shthevak    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -81,6 +81,9 @@ int						ft_is_builtin(char **tab, t_envlist **envir);
 void					ft_change_env(char *var, char *val, t_envlist **env);
 void					ft_print_env(t_envlist **env);
 int						ft_cd(char **tab, t_envlist **env);
+int						ft_env(char **tab, t_envlist **env);
+int						ft_set_env(char **tab, t_envlist **env);
+int						ft_unset_env(char **tab, t_envlist **env);
 
 /*
 ** P

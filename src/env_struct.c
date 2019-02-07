@@ -6,7 +6,7 @@
 /*   By: shthevak <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/01/29 12:54:50 by shthevak     #+#   ##    ##    #+#       */
-/*   Updated: 2019/02/06 17:36:00 by shthevak    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/02/07 15:25:34 by shthevak    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -81,16 +81,27 @@ void		ft_print_env(t_envlist **env)
 
 void		ft_change_env(char *var, char *val, t_envlist **env)
 {
-	t_envlist *list;
+	t_envlist	*list;
+	t_envlist	*nlist;
+	int			i;
+	char		**new;
 
 	list = *env;
+	i = 0;
 	while (list)
 	{
 		if (ft_strcmp(list->var, var) == 0)
 		{
 			free(list->val);
 			list->val = ft_strdup(val);
+			i++;
 		}
 		list = list->next;
+	}
+	if (i == 0)
+	{
+		nlist = create_env_elem(var, val);
+		nlist->env = 1;
+		env_list_add(env, nlist);
 	}
 }

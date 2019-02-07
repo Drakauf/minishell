@@ -6,7 +6,7 @@
 /*   By: shthevak <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/01/28 18:24:11 by shthevak     #+#   ##    ##    #+#       */
-/*   Updated: 2019/02/06 17:33:25 by shthevak    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/02/07 17:44:11 by shthevak    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -26,7 +26,7 @@ void	ft_parse_line(char *line, t_envlist **envir)
 	while (line[i])
 	{
 		i = separate_scolon(line, i);
-		((str = ft_strsub(line, j, i))) ? 0 : exit(0);
+		((str = ft_strsub(line, j, i - j))) ? 0 : exit(0);
 		tab = ft_split_com(str);
 		tab[0] ? tab = ft_handle_tab(tab, envir) : 0;
 		tab[0] ? ft_to_execute(tab, envir) : 0;
@@ -45,6 +45,8 @@ void	ft_print_prompt(t_envlist **envir)
 	getcwd(dir, 999);
 	if (ft_strcmp(dir, "/Users/shthevak") == 0)
 		ft_printf("[red]~ [eoc]", dir);
+	else if (ft_strcmp(dir, "/") == 0)
+		ft_printf("[green]=>[eoc] ");
 	else
 	{
 		tab = ft_strsplit(dir, '/');

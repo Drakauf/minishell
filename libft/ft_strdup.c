@@ -6,7 +6,7 @@
 /*   By: shthevak <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/12/11 12:31:38 by shthevak     #+#   ##    ##    #+#       */
-/*   Updated: 2018/01/26 13:37:25 by shthevak    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/02/07 17:10:17 by shthevak    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -18,6 +18,8 @@ char	*ft_strdup(const char *s)
 	size_t	l;
 	char	*r;
 
+	if (!s)
+		return (NULL);
 	if (!(r = malloc(sizeof(*r) * (ft_strlen(s) + 1))))
 		return (NULL);
 	l = 0;
