@@ -6,26 +6,63 @@
 /*   By: shthevak <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/02/05 14:36:33 by shthevak     #+#   ##    ##    #+#       */
-/*   Updated: 2019/02/08 13:52:39 by shthevak    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/02/08 16:56:13 by shthevak    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void	execute(char *exec, char **tab)
+int		env_len(t_envlist **envir)
+{
+	int i;
+	t_envlist *list;
+
+	i = 0;
+	list = *envir;
+	while(list)
+	{
+		list = list->next;
+		i++;
+	}
+	return (i);
+}
+
+char	**env_tab(t_envlist **envir)
+{
+	t_envlist *list;
+	int 		i;
+	char		**tab;
+	char		c;
+
+	list = *envir;
+	if (!(tab = malloc(sizeof(tab) * (env_len(envir) + 1))))
+		return (NULL);
+	i = 0;
+	while(list)
+	{
+		tab[i] = ft_strjoin(list->var, "=");
+		tab[i] = ft_strjoinfree(&(tab[i]), list->val);
+		list = list->next;
+		i++;
+	}
+	tab[i] = NULL;
+	return (tab);
+}
+
+void	execute(char *exec, char **tab, char **en)
 {
 	int		w;
 	pid_t	p;
 
 	p = fork();
 	if (p == 0)
-		execve(exec, tab, NULL);
+		execve(exec, tab, en);
 	else
 		wait(&w);
 }
 
-void	ft_exec(char **tab, t_envlist **envir)
+void	ft_exec(char **tab, t_envlist **envir, char **en)
 {
 	char	*str;
 	char	**path;
@@ -43,7 +80,7 @@ void	ft_exec(char **tab, t_envlist **envir)
 		execp = ft_strjoinfree(&execp, tab[0]);
 		if (ft_valid_execp(execp, &j))
 		{
-			execute(execp, tab);
+			execute(execp, tab, en);
 			j++;
 		}
 		ft_strdel(&execp);
@@ -56,16 +93,20 @@ void	ft_exec(char **tab, t_envlist **envir)
 
 void	ft_to_execute(char **tab, t_envlist **envir)
 {
+	char	**en;
+
+	en = env_tab(envir);
 	if (ft_is_path(tab[0]))
 	{
 		if (ft_valid_path(tab[0]))
-			execute(tab[0], tab);
+			execute(tab[0], tab, en);
 		return ;
 	}
 	if (ft_is_builtin(tab, envir))
 		return ;
 	else
 	{
-		ft_exec(tab, envir);
+		ft_exec(tab, envir, en);
 	}
+	ft_free_tab(en);
 }
