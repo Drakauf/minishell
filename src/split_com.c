@@ -6,7 +6,7 @@
 /*   By: shthevak <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/02/01 13:33:31 by shthevak     #+#   ##    ##    #+#       */
-/*   Updated: 2019/02/05 13:54:28 by shthevak    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/02/08 13:19:07 by shthevak    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -34,7 +34,7 @@ int		ft_wordlen(char *s, size_t i)
 	k = 0;
 	while (s[j])
 	{
-		while (s[j] && (s[j] <= 9 || s[j] >= 13) && s[j] != ' ' &&
+		while (s[j] && (s[j] < 9 || s[j] > 13) && s[j] != ' ' &&
 				s[j] != '\'' && s[j] != '"')
 			j++;
 		if (s[j] && (s[j] == '"' || s[j] == '\''))
@@ -66,7 +66,7 @@ int		ft_words(char *line)
 			i++;
 		if (line[i])
 		{
-			while (line[i] && (line[i] >= 13 || line[i] <= 9)
+			while (line[i] && (line[i] > 13 || line[i] < 9)
 					&& line[i] != ' ' && line[i] != '\'' && line[i] != '"')
 				i++;
 			line[i] == '\'' ? ft_last_squote(line, line[i], &i, &g) : 0;
