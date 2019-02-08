@@ -6,7 +6,7 @@
 /*   By: shthevak <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/02/05 16:39:01 by shthevak     #+#   ##    ##    #+#       */
-/*   Updated: 2019/02/07 17:08:00 by shthevak    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/02/08 13:52:40 by shthevak    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -42,11 +42,14 @@ int		ft_valid_path(char *str)
 	return (1);
 }
 
-int		ft_valid_execp(char *str)
+int		ft_valid_execp(char *str, int *j)
 {
 	if ((access(str, F_OK) == -1))
 		return (0);
 	if ((access(str, X_OK) == -1))
+	{
+		*j = 20;
 		return (0);
+	}
 	return (1);
 }

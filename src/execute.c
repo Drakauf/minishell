@@ -6,7 +6,7 @@
 /*   By: shthevak <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/02/05 14:36:33 by shthevak     #+#   ##    ##    #+#       */
-/*   Updated: 2019/02/07 17:43:35 by shthevak    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/02/08 13:52:39 by shthevak    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -41,7 +41,7 @@ void	ft_exec(char **tab, t_envlist **envir)
 	{
 		execp = ft_strjoin(path[i], "/");
 		execp = ft_strjoinfree(&execp, tab[0]);
-		if (ft_valid_execp(execp))
+		if (ft_valid_execp(execp, &j))
 		{
 			execute(execp, tab);
 			j++;
@@ -50,6 +50,7 @@ void	ft_exec(char **tab, t_envlist **envir)
 	}
 	ft_free_tab(path);
 	(j == 0) ? ft_printf("%s: Command not found\n", tab[0]) : 0;
+	(j == 20) ? ft_printf("%s: Can't execute\n", tab[0]) : 0;
 	ft_strdel(&str);
 }
 

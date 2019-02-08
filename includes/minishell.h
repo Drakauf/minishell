@@ -6,7 +6,7 @@
 /*   By: shthevak <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/01/29 01:50:41 by shthevak     #+#   ##    ##    #+#       */
-/*   Updated: 2019/02/07 13:46:24 by shthevak    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/02/08 13:49:49 by shthevak    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -74,7 +74,7 @@ int						ft_getin_dquote(char *s, char **n, int *i,\
 void					ft_to_execute(char **tab, t_envlist **envir);
 int						ft_is_path(char *str);
 int						ft_valid_path(char *str);
-int						ft_valid_execp(char *str);
+int						ft_valid_execp(char *str, int *i);
 char					*ft_get_path(t_envlist **envir);
 char					*ft_get_val(char *str, t_envlist **envir);
 int						ft_is_builtin(char **tab, t_envlist **envir);
