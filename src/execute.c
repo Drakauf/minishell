@@ -6,7 +6,7 @@
 /*   By: shthevak <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/02/05 14:36:33 by shthevak     #+#   ##    ##    #+#       */
-/*   Updated: 2019/02/08 16:56:13 by shthevak    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/02/08 17:40:12 by shthevak    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -15,12 +15,12 @@
 
 int		env_len(t_envlist **envir)
 {
-	int i;
-	t_envlist *list;
+	int			i;
+	t_envlist	*list;
 
 	i = 0;
 	list = *envir;
-	while(list)
+	while (list)
 	{
 		list = list->next;
 		i++;
@@ -30,8 +30,8 @@ int		env_len(t_envlist **envir)
 
 char	**env_tab(t_envlist **envir)
 {
-	t_envlist *list;
-	int 		i;
+	t_envlist	*list;
+	int			i;
 	char		**tab;
 	char		c;
 
@@ -39,7 +39,7 @@ char	**env_tab(t_envlist **envir)
 	if (!(tab = malloc(sizeof(tab) * (env_len(envir) + 1))))
 		return (NULL);
 	i = 0;
-	while(list)
+	while (list)
 	{
 		tab[i] = ft_strjoin(list->var, "=");
 		tab[i] = ft_strjoinfree(&(tab[i]), list->val);
@@ -100,10 +100,12 @@ void	ft_to_execute(char **tab, t_envlist **envir)
 	{
 		if (ft_valid_path(tab[0]))
 			execute(tab[0], tab, en);
+	}
+	else if (ft_is_builtin(tab, envir))
+	{
+		ft_free_tab(en);
 		return ;
 	}
-	if (ft_is_builtin(tab, envir))
-		return ;
 	else
 	{
 		ft_exec(tab, envir, en);
