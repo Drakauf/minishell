@@ -6,7 +6,7 @@
 /*   By: shthevak <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/02/06 15:35:47 by shthevak     #+#   ##    ##    #+#       */
-/*   Updated: 2019/02/07 17:33:53 by shthevak    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/02/13 16:17:01 by shthevak    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -21,10 +21,12 @@ void	ft_cd_back(char **tab, t_envlist **env)
 	oldpwd = NULL;
 	pwd = ft_strdup(ft_get_val("PWD", env));
 	oldpwd = ft_strdup(ft_get_val("OLDPWD", env));
-	ft_change_env("PWD", oldpwd, env);
 	ft_change_env("OLDPWD", pwd, env);
 	if (oldpwd)
+	{
+		ft_change_env("PWD", oldpwd, env);
 		chdir(oldpwd);
+	}
 	ft_strdel(&pwd);
 	ft_strdel(&oldpwd);
 }
