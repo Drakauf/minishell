@@ -6,7 +6,7 @@
 /*   By: shthevak <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/02/06 15:35:47 by shthevak     #+#   ##    ##    #+#       */
-/*   Updated: 2019/02/13 16:17:01 by shthevak    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/02/14 17:37:55 by shthevak    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -21,14 +21,17 @@ void	ft_cd_back(char **tab, t_envlist **env)
 	oldpwd = NULL;
 	pwd = ft_strdup(ft_get_val("PWD", env));
 	oldpwd = ft_strdup(ft_get_val("OLDPWD", env));
-	ft_change_env("OLDPWD", pwd, env);
+	if (pwd)
+	{
+		ft_change_env("OLDPWD", pwd, env);
+		ft_strdel(&pwd);
+	}
 	if (oldpwd)
 	{
 		ft_change_env("PWD", oldpwd, env);
 		chdir(oldpwd);
+		ft_strdel(&oldpwd);
 	}
-	ft_strdel(&pwd);
-	ft_strdel(&oldpwd);
 }
 
 void	ft_cd_two(char **tab, t_envlist **env)
@@ -37,11 +40,14 @@ void	ft_cd_two(char **tab, t_envlist **env)
 	char dir[999];
 
 	pwd = ft_strdup(ft_get_val("PWD", env));
-	ft_change_env("OLDPWD", pwd, env);
+	if (pwd)
+	{
+		ft_change_env("OLDPWD", pwd, env);
+		ft_strdel(&pwd);
+	}
 	chdir(tab[1]);
 	getcwd(dir, 999);
 	ft_change_env("PWD", dir, env);
-	ft_strdel(&pwd);
 }
 
 void	ft_cd_three(char **tab, t_envlist **env)
@@ -50,16 +56,19 @@ void	ft_cd_three(char **tab, t_envlist **env)
 	char	*pwd;
 
 	str = NULL;
-	str = ft_get_val("HOME", env);
+	str = ft_strdup(ft_get_val("HOME", env));
 	if (str)
 	{
 		pwd = ft_strdup(ft_get_val("PWD", env));
-		ft_change_env("OLDPWD", pwd, env);
+		if (pwd)
+		{
+			ft_change_env("OLDPWD", pwd, env);
+			ft_strdel(&pwd);
+		}
 		chdir(str);
 		ft_change_env("PWD", str, env);
-		ft_strdel(&pwd);
+		ft_strdel(&str);
 	}
-	ft_strdel(&str);
 }
 
 int		ft_cd(char **tab, t_envlist **env)
